@@ -1,0 +1,732 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{DejaVu Serif}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{6em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\hypersetup{pdftitle={Signed direction blocks and exact edge general position in rank-two independence cubes},pdfauthor={Ryutaro Yonezu (Independent Researcher)},pdfsubject={Research No.79 v1.0 Preprint; independent AI audit conditional PASS; not human peer reviewed}}
+\begin{document}
+
+\section{Signed direction blocks and exact edge general position in
+rank-two independence
+cubes}\label{signed-direction-blocks-and-exact-edge-general-position-in-rank-two-independence-cubes}
+
+Research No.79, v1.0 Preprint --- 2026-11-21 JST
+
+Ryutaro Yonezu (Independent Researcher)
+
+Independent AI mathematical audit of Theorems 1--6: CONDITIONAL PASS; no
+defect found. Application Appendix A: separate limited independent AI
+audit of model membership and lower constructions; original upper bounds
+depend on Nos.75--78. No human peer review or formal proof.
+
+NOVELTY INCONCLUSIVE / REFERENCES PARTIAL / NOT HUMAN PEER REVIEWED /
+All rights reserved.
+
+\subsection{Abstract}\label{abstract}
+
+We give a shared structural framework for edge general position in
+isometric hypercube subgraphs, including the Fibonacci-type graphs
+studied in Research Nos.75--78. Two-arm exclusions imply a star forest,
+balanced direction relations and an antipodal support restriction across
+maximal two-connected direction blocks. For independence cubes of rank
+at most two, we identify domination exactly with one plus the
+vertex-cover number of the graph of legal pairs. A partition certificate
+then yields exact edge general position numbers for infinite families,
+including arbitrary disjoint unions of triangle-free paths and cycles,
+certain bipartite graphs, and linear/cyclic spacing cubes in explicit
+ranges. We additionally prove a strict domination-bound gap and an exact
+formula for double stars with at least two leaves on each side. A finite
+catalogue covers all labelled triangle-free legal-pair graphs on at most
+six labels. The unrestricted spacing-cube formula and a single
+derivation of all previous Fibonacci-type formulas are not claimed.
+Finite tests do not serve as premises of the analytic theorems.
+
+\subsection{1. Shared structural
+framework}\label{shared-structural-framework}
+
+Let G be a finite isometric induced subgraph of Q\_n.~An edge general
+position set (EGP set) S contains no three distinct edges on one
+geodesic; gp\_e(G) is the maximum cardinality. A coordinate direction
+class Theta\_i contains all edges flipping bit i; B2 is the sum of the
+largest two class sizes (pad with zero if necessary). Every geodesic
+flips its differing coordinates exactly once. For any subset J of
+directions, the union of its complete classes is EGP if and only if the
+Hamming diameter of the projection of V(G) onto J is at most two: if
+larger, a geodesic between witnessing vertices contains three selected
+edges; conversely at most two selected directions are flipped on any
+geodesic. In particular B2 is always a lower bound. In a down-set of
+Boolean words, shortest paths through intersection show isometry. On
+active coordinates and for \textbar J\textbar\textgreater=3, the
+projection diameter condition holds precisely when no legal pair of ones
+lies inside J: such a pair and a third active singleton have projected
+distance three; otherwise the projection consists of zero and
+singletons.
+
+\textbf{Lemma 1 (projection exclusion).} If two selected edges of
+directions i,j share center c, any selected edge of another direction l
+has fixed bits x\_i XOR x\_j=c\_i XOR c\_j. Otherwise its projection on
+i,j matches exactly one leaf of the two-arm star. Orient the third edge
+so that its initial endpoint w has l-bit equal to c\_l. Starting at the
+opposite leaf, traverse the two arms through c to the matching leaf z,
+then a shortest z-w path, then the third edge. The intervening path
+flips neither i,j nor l. All the coordinates flipped by the
+concatenation are distinct, so it is a geodesic, a contradiction.
+
+\textbf{Lemma 2 (star forest).} If S uses at least three directions, the
+spanning selected subgraph is a disjoint union of stars and isolates. A
+simple three-edge selected path with distinct directions would be a
+geodesic. The only possible repetition pattern is i,j,i; the two
+overlapping two-arm stars then have opposite parity in (i,j), which
+excludes every selected third-direction edge by Lemma 1. There is
+therefore no simple three-edge path. As G is bipartite, every connected
+selected component is a star or isolate.
+
+\textbf{Theorem 1 (signed blocks).} Suppose S uses at least three
+directions and has a star of degree at least three. Form R on its active
+directions, putting an edge ij if they co-occur at a selected star
+center, labelled sigma\_ij=c\_i XOR c\_j. This is well defined by Lemma
+1 and the existence of a third active direction. Every cycle has label
+XOR zero: any cycle omitting an active direction is tested by a selected
+edge of that direction, and the XOR telescopes. A cycle with a chord
+reduces to its two shorter cycles. A chordless spanning cycle of length
+\textgreater=4 is impossible because R has a triangle from a selected
+star. A spanning triangle has its three labels from that star, so its
+XOR is zero. Consequently each connected component admits a bit
+potential p with sigma\_ij=p\_i XOR p\_j, by propagation along paths.
+
+Let D be an inclusion-maximal vertex set containing a maximum star's
+clique in R and inducing a two-vertex-connected graph; write
+d=\textbar D\textbar\textgreater=3. For an exterior selected edge of
+direction l not in D, all constraints of R{[}D{]} hold, so its
+projection is p or its complement q. For a selected edge in direction l
+in D, the constraints of the connected R{[}D-\{l\}{]} force its other
+bits to match p or q, so it is a radial edge incident to p or q. An
+outside direction has at most one neighbor in D in R: otherwise
+adjoining that direction would preserve connectivity after deletion of
+any single vertex, contrary to maximality. These conclusions follow
+solely from isometry and EGP, not from any recurrence or density
+formula. They apply to all four earlier Fibonacci-type models, which are
+down-sets.
+
+\subsection{2. Antipodal support and
+capacity}\label{antipodal-support-and-capacity}
+
+For any D of size d\textgreater=3 and any p,q complementary on D, call
+vertices projecting to p or q cores. Available radial edges flip a D bit
+from a core. Their other endpoints are private leaves in this support: a
+one-bit neighbor of one antipode is not a one-bit neighbor of the other,
+and the unchanged outside coordinates identify the unique core. Exterior
+edges join cores; the support includes only these two types. Write C for
+the number of cores, a(v) for the radial degree at a core v, L=sum\_v
+a(v), and Z for the number of zero-radial-degree cores. The full radial
+family is EGP. In a projected geodesic a core pattern, once left by a D
+flip, cannot be revisited. If both antipodes are visited, all D flips
+are between those visits and only the first and last can be radial; if
+just one is visited, at most two edges incident with it can be radial.
+Thus there are at most two radial edges on any geodesic.
+
+For an S supported here with at least three active directions, orient
+each selected star from its center to its leaves. Every selected
+exterior edge has a core leaf without any selected radial arm. Charge it
+to an omitted radial edge at that leaf if a(v)\textgreater0, or to that
+leaf if a(v)=0. All charges are distinct, proving
+\textbar S\textbar\textless=L+Z. In particular, if Z=0 the best possible
+supported EGP size is L. If the maximum selected degree is \textless=d,
+the star-forest vertex count also gives
+\textbar S\textbar\textless=floor(d(C+L)/(d+1)). These bounds include
+the signed-block support of Theorem 1. The frozen v0.2--v0.4 supplements
+supply further conditional matching, packing and weighted bounds; those
+are relaxations, not assertions of universal equality. They are not
+needed for the analytic exact theorems below.
+
+\subsection{3. Rank-two domination and a partition
+certificate}\label{rank-two-domination-and-a-partition-certificate}
+
+Let K be any simple triangle-free graph with n\textgreater=1 labels and
+m edges. Define G\_K as the cube induced by the cliques of K
+(equivalently, independent sets of its complement). Its vertices are
+empty, n singletons and m pairs. Its edges are spokes empty--singleton
+and incidence edges pair--singleton. Thus N=1+n+m and
+\textbar Theta\_i\textbar=1+deg\_K(i). Write tau(K) for minimum
+vertex-cover size, alpha(K)=n-tau(K) for independence number, and
+gamma(G\_K) for domination number.
+
+\textbf{Theorem 2.} gamma(G\_K)=1+tau(K), and
+gp\_e(G\_K)\textless=max(B2,m+alpha(K)).
+
+Proof. Empty together with the singleton vertices of a minimum vertex
+cover dominates G\_K. For a dominating set of any size, let T be the
+chosen singleton labels, U=V(K)\textbackslash{}T, and P its chosen pair vertices viewed
+as edges of K. Each edge of K{[}U{]} must lie in P. Choosing T and one
+endpoint per such edge yields a cover of size at most
+\textbar T\textbar+\textbar E(K{[}U{]})\textbar. If empty is chosen or P
+contains an extra edge beyond E(K{[}U{]}), the dominating set has at
+least 1+tau vertices. Otherwise empty is not chosen and P=E(K{[}U{]}); T
+is nonempty because empty needs a neighbor. If two edges of K{[}U{]}
+share an endpoint, cover those two by one vertex and every remaining
+edge by one, giving
+tau\textless=\textbar T\textbar+\textbar P\textbar-1. In the remaining
+case K{[}U{]} is a matching. Every u in U is incident with a chosen pair
+because its singleton must be dominated. Choose t in T. Retain T\{t\},
+and select one endpoint per matching edge, taking the endpoint adjacent
+to t if one exists. Triangle-freeness prevents both endpoints being
+adjacent to t. This covers all edges of K, including those incident to
+t; the cover has size \textbar T\textbar+\textbar P\textbar-1. This
+completes the domination proof.
+
+By Lemma 2, an EGP set using \textgreater=3 directions has star
+components and isolates; one center per component is a dominating set in
+G\_K. If there are c components then
+\textbar S\textbar=N-c\textless=N-gamma=m+alpha. Sets using at most two
+directions have size \textless=B2. QED.
+
+For an arbitrary D subset of V(K), let T=V(K)\textbackslash{}D and select every edge
+with direction in D incident to a vertex whose projection onto D is
+zero. This one-core-pattern radial family is EGP even if
+\textbar D\textbar\textless3: a projected geodesic can only leave or
+enter that pattern once each. Its size is
+\textbar D\textbar+cut\_K(D,T), since it includes the
+\textbar D\textbar{} spokes and one incidence edge per crossing pair.
+Write e\_K(X)=\textbar E(K{[}X{]})\textbar{} and define
+
+c(K)=min\_\{T subset V(K)\} (\textbar T\textbar+e\_K(T)+e\_K(V(K)\textbackslash{}T)).
+
+Then tau(K)\textless=c(K) (T plus one endpoint per uncovered edge is a
+cover), and the largest one-pattern radial family has n+m-c(K) edges.
+Theorem 2 yields the exact sandwich
+
+max(B2,n+m-c(K)) \textless= gp\_e(G\_K) \textless= max(B2,n+m-tau(K)).
+(1)
+
+\textbf{Theorem 3 (partition certificate).} If there is a partition into
+T,D with T independent and \textbar T\textbar+e\_K(D)=tau(K), then
+
+gp\_e(G\_K)=max(B2,m+alpha(K)). (2)
+
+In fact c(K)=tau(K) if and only if such a certificate exists. For the
+reverse direction, a partition cost equal to tau satisfies
+tau\textless=\textbar T\textbar+e\_K(D)\textless=cost=tau, so e\_K(T)=0.
+Necessarily K{[}D{]} is a matching plus isolates: two adjacent uncovered
+edges permit the cover to save one vertex, contradicting minimality.
+This is an exact criterion for the partition bound to reach the
+domination term, not a necessary condition for the latter term to be
+attained by arbitrary EGP sets.
+
+\textbf{Corollary 3a.} If K is triangle-free and max degree \textless=2,
+equation (2) holds. Its components are paths (including isolates) or
+cycles. In a path or an even cycle choose the smaller alternating side
+as T; it is independent, D is independent, and a matching of size
+\textbar T\textbar{} proves minimum cover size \textbar T\textbar. In an
+odd cycle of length 2r+1\textgreater=5, choose r alternate vertices as
+T; D has exactly one edge. The cycle has cover number r+1 because an
+independent set has at most r vertices (each selected vertex has a
+distinct unselected successor) and the construction reaches r. Thus
+\textbar T\textbar+e(D)=r+1. Combining these certificates over
+components proves the result by additivity of vertex-cover size. More
+generally, a disjoint union of bipartite components each having a
+matching saturating its smaller part has a certificate given by the
+union of those smaller parts. Both statements allow arbitrarily many
+coordinate labels.
+
+\subsection{4. Strict domination gap: an exact double-star
+family}\label{strict-domination-gap-an-exact-double-star-family}
+
+\textbf{Theorem 4.} Let K be a double star with adjacent centers a,b,
+with p\textgreater=2 leaves adjacent only to a and q\textgreater=2
+leaves adjacent only to b. Write s=p+q. Then gp\_e(G\_K)=2s. The
+domination term is 2s+1, strictly too large.
+
+Proof. K has n=s+2, m=s+1, tau=2 (the two centers cover K and disjoint
+edges force at least two cover vertices), and B2=s+4\textless=2s.
+Equation (1) gives gp\_e\textless=2s+1. Choose all leaves as D in the
+radial construction, giving s spokes and s crossing incidence edges,
+hence 2s edges.
+
+It remains to exclude an EGP set of size 2s+1. Such a set needs
+\textgreater=3 directions because B2\textless=2s. It is a star forest
+and has exactly N-(2s+1)=3 components. Any choice of star centers
+(isolates included) is a dominating triple. We show that the only
+dominating triple is \{empty,\{a\},\{b\}\}. A dominating triple not
+containing empty must contain at least one singleton to dominate empty.
+If it has t\textgreater=1 singleton vertices, its remaining 3-t pair
+vertices can dominate at most 2(3-t) singleton vertices, so at most
+t+2(3-t)\textless=5 singleton vertices are dominated. There are
+s+2\textgreater=6. If empty belongs to the triple, pair vertices must be
+dominated by the other two selected vertices. If \{a\} is not chosen,
+the p\textgreater=2 pairs consisting of a and an a-leaf each need their
+own chosen leaf singleton or that pair vertex. Thus both remaining
+positions must be used for these pairs (or p\textgreater2 is already
+impossible). Neither of these positions can dominate any pair consisting
+of b and a b-leaf; contradiction. By symmetry \{b\} must be chosen too.
+The triple is unique.
+
+Every noncenter vertex now has to attach to an adjacent center in its
+star. Each leaf singleton must attach to empty, and each center--leaf
+pair must attach to its corresponding center singleton. The bridge pair
+\{a,b\} attaches either to \{a\} or \{b\}. In the former case, at \{a\}
+the bridge direction b and an a-leaf direction i are selected arms, with
+center parity zero on b,i. At \{b\} any b-leaf direction j is a third
+selected direction; its fixed bits have b=1,i=0. This contradicts Lemma
+1. Attachment to \{b\} is symmetric. No EGP set reaches the domination
+term, and the constructed lower bound is exact. QED.
+
+\subsection{5. Spacing cubes: exact ranges and
+limits}\label{spacing-cubes-exact-ranges-and-limits}
+
+Let G(n,h) be the cube of binary words of length n whose ones have
+pairwise index distance \textgreater=h+1. Let A\_m\^{}(h)=1 for
+m\textless=0 and A\_m=A\_(m-1)+A\_(m-h-1) for m\textgreater=1. Let
+G\_c(n,h) use the analogous cyclic distance. These models are known
+generalized Fibonacci/Lucas cubes; the run-avoidance model of earlier
+Nos.77--78 differs.
+
+\textbf{Theorem 5 (linear rank-two range).} For h\textgreater=2 and
+2\textless=n\textless=2h+2, gp\_e(G(n,h))=A\_(n-1)\^{}(h).
+
+If n\textless=h+1 the graph is an n-edge star. Otherwise put t=n-h-1,
+with 1\textless=t\textless=h+1. Legal pairs connect left positions 1..t
+and right positions h+2..n. These parts are disjoint, the graph is
+bipartite (other labels isolated), and pairs (i,i+h+1) form a matching
+of size t saturating both sides. Thus tau=t, m=t(t+1)/2,
+N-gamma=n+m-t=A\_(n-1). Each coordinate class has at most 1+t edges.
+B2\textless=2(1+t)\textless=n+m-t: the difference is h-1-2t+t(t+1)/2 =
+h-2+(t-1)(t-2)/2, nonnegative for h\textgreater=2,t\textgreater=1.
+Taking the first h+1 coordinate classes selects every word meeting those
+positions, each exactly once, so yields A\_n-A\_(n-h-1)=A\_(n-1). This
+also follows from the partition certificate. QED.
+
+\textbf{Theorem 6 (cyclic rank-two range).} For h\textgreater=1,
+gp\_e(G\_c(n,h))=n for 2\textless=n\textless=2h+2 and
+gp\_e(G\_c(2h+3,h))=3h+4.
+
+When n\textless=2h+1 the legal-pair graph is empty; at n=2h+2 it is a
+perfect matching with tau=h+1. At n=2h+3 it is a cycle on n labels with
+step h+1, since gcd(h+1,2h+3)=1. No three ones fit cyclically because
+the sum of three gaps would have to be
+\textgreater=3(h+1)\textgreater2h+3 for h\textgreater=1. Apply Corollary
+3a: for the matching, m+alpha=n and B2=4\textless=n; for the cycle,
+m+alpha=(2h+3)+(h+1)=3h+4 and B2=6\textless=3h+4. This includes the
+previously known Lambda\_5 value 7, not a new claim for that instance.
+QED.
+
+The frozen v0.2 proof gives the analytic lower bound A\_(n-1) for every
+h\textgreater=2,n\textgreater=2 and bounds all complete coordinate
+unions and pure antipodal radial families by that number. The v0.3--v0.4
+supplements report coincident computational bounds for 42 spacing
+models: h=2,n=2..16; h=3,n=2..15; h=4,n=2..14. These finite results are
+inherited working results, not necessary for Theorems 1--6; their
+earlier verifiers have not been fully replayed in v0.6. The frozen v0.5
+also identifies a barrier: for n\textgreater=2h+3 the domination number
+is \textless=A\_(n-h-1)-1, so the domination bound alone cannot settle
+the all-n linear conjecture. This is a limitation of the method, not a
+counterexample to that conjecture.
+
+\subsection{6. Finite catalogue and boundary of
+scope}\label{finite-catalogue-and-boundary-of-scope}
+
+The new verifier enumerates all labelled simple triangle-free graphs K
+for 1\textless=n\textless=6 (6,228 in total, including isolated labels),
+checks vertex-cover and partition costs by direct enumeration, and finds
+6,138 with c=tau. Every remaining graph (90) is isomorphic to the double
+star p=q=2: its degree multiset is (1,1,1,1,3,3), the degree-three
+vertices adjacent, and it has five edges. These facts force the asserted
+isomorphism. Theorem 4 covers all 90. Hence the catalogue is exhausted
+by a finite classification and the analytic theorems. As supplementary
+checks, the code computes actual BFS distances and forbidden triples by
+all orientations/orders in 51 models on at most four labels and in the
+remaining representative double star (optimum 8, 92 forbidden triples);
+it also checks unique dominating triples for 25 double stars p,q=2..6.
+This is author-side corroboration, not independent review. The infinite
+theorems do not depend on this catalogue.
+
+We deliberately stop generalization here. The paper provides a common
+structural mechanism rather than a single fresh exact formula subsuming
+Nos.75--78. The full linear spacing conjecture, the cyclic range
+n\textgreater2h+3, arbitrary rank-two legal graphs not covered by the
+certificate/double-star theorem, and higher-rank independence cubes
+remain open within this work. No global novelty or priority claim is
+made. Theorems 1--6 received a conditional independent AI mathematical
+audit PASS. The unrestricted cases remain open.
+
+\subsection{References (partial)}\label{references-partial}
+
+\begin{itemize}
+\item
+  P. Manuel, R. Prabha, S. Klavžar, The edge general position problem,
+  Bull. Malays. Math. Sci. Soc. 45 (2022), 2997--3009, DOI
+  10.1007/s40840-022-01319-8. The two-Theta-class construction in
+  partial cubes is prior work (Lemma 3.1).
+\item
+  J. Tian, S. Klavžar, E. Tan, Extremal Edge General Position Sets in
+  Some Graphs, Graphs Combin. 40 (2024), article 40, DOI
+  10.1007/s00373-024-02770-z.
+\item
+  P. Manuel, R. Prabha, S. Klavžar, Generalization of edge general
+  position problem, Art Discrete Appl. Math. 8 (2025), \#P1.02, DOI
+  10.26493/2590-9770.1745.5f4.
+\item
+  Z. Hamed-Labbafian, M. A. Henning, M. Tavakoli, Edge general position
+  in graphs: Graph products, integer linear programming and some
+  applications, Discrete Appl. Math. 386 (2026), 1--8, DOI
+  10.1016/j.dam.2026.01.008. An ILP approach is prior work.
+\item
+  V. Ullas Chandran S. V., S. Klavžar, J. Tuite, The General Position
+  Problem: A Survey, arXiv:2501.19385 (2025), Section 3.6.
+\item
+  S. Klavzar and E. Tan, Edge General Position Sets in Fibonacci and
+  Lucas Cubes (2023), DOI 10.1007/s40840-023-01517-y,
+  https://arxiv.org/abs/2304.10114. Prior two-class constructions and
+  Fibonacci/Lucas EGP context.
+\item
+  P. Codara and O. M. D'Antona, Generalized Fibonacci and Lucas cubes
+  arising from powers of paths and cycles, Discrete Mathematics 339
+  (2016), 270--282, DOI 10.1016/j.disc.2015.08.012. Prior graph model
+  and enumeration.
+\item
+  Author's earlier research Nos.75--78: related constructions and
+  proofs. Their claimed exact formulas are not re-proved or claimed as
+  new results here.
+\end{itemize}
+
+Targeted preliminary searches for edge general position with daisy
+cubes, independence cubes, domination, and generalized Fibonacci cubes
+did not identify a direct matching theorem. Search-result/abstract scope
+only; full-text/citation survey remains incomplete. NOVELTY INCONCLUSIVE
+/ REFERENCES PARTIAL.
+
+\newpage
+
+\section{Research No.79 v0.6 --- Application Appendix A:
+Nos.75--78}\label{research-no.79-v0.6-application-appendix-a-nos.7578}
+
+\textbf{Editorial Appendix A --- 2026-11-21 JST.} This appendix received
+a separate limited independent AI audit of its down-set assumptions,
+construction counts and selected finite cases. The earlier independent
+audit of Theorems 1--6 did not cover it. Upper bounds and equality
+claims remain dependent on Nos.75--78. NOVELTY INCONCLUSIVE / REFERENCES
+PARTIAL / NOT HUMAN PEER REVIEWED / All rights reserved.
+
+\subsection{A1. The exact distinction between applicability and a
+unified
+proof}\label{a1.-the-exact-distinction-between-applicability-and-a-unified-proof}
+
+No.79, Lemmas 1--2 and Theorem 1 are shared \textbf{structural} results
+for isometric induced subgraphs of a hypercube; the complete exact
+formulas of Nos.75--78 do \textbf{not} follow from those structural
+results alone. No.79, Theorems 2--6, are \textbf{rank-two} theorems and
+cannot be applied automatically to every dimension of Nos.75--78.
+Individual \emph{upper bounds and equality classifications} below are
+imported from the respective earlier mathematical manuscripts, not
+re-proved independently here. No claim of a new unified derivation of
+all four formulas is made.
+
+\subsection{A2. One proof of isometry for each of the four graph
+families}\label{a2.-one-proof-of-isometry-for-each-of-the-four-graph-families}
+
+Each family has as vertices a set of binary words closed under changing
+any 1 to 0:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  No.75: length-\texttt{n} words avoiding adjacent ones,
+  n\textgreater=2;
+\item
+  No.76: length-\texttt{n} cyclic words avoiding cyclically adjacent
+  ones, n\textgreater=3;
+\item
+  No.77: length-\texttt{n} words avoiding \texttt{k} consecutive ones,
+  k\textgreater=3 and n\textgreater=2;
+\item
+  No.78: length-\texttt{n} cyclic words avoiding cyclic runs of
+  \texttt{k} ones, n\textgreater=k\textgreater=3.
+\end{enumerate}
+
+Deleting ones cannot create a forbidden all-ones pattern. For two
+allowed words x,y, first delete each bit in x\textbackslash{}y, reaching x AND y; then
+insert each bit in y\textbackslash{}x, remaining within the support of y. Every
+intermediate word is legal. This path has Hamming length \textbar x XOR
+y\textbar, so every family is an isometric induced subgraph of
+Q\_n.~Thus for every EGP set S in any of the four models:
+
+\begin{itemize}
+\tightlist
+\item
+  No.79's two-arm projection exclusion, Lemma 1, applies.
+\item
+  If S uses \textgreater=3 coordinate directions, the selected subgraph
+  is a star forest (Lemma 2).
+\item
+  If S uses \textgreater=3 directions and has a selected star of degree
+  \textgreater=3, the signed direction relation, balanced potentials,
+  maximal 2-connected block, and antipodal radial/exterior support
+  conclusion of Theorem 1 apply \textbf{subject to its stated
+  hypotheses}.
+\item
+  A complete union of at most two coordinate classes is always EGP.
+\end{itemize}
+
+This is a direct analytic check of every model's hypotheses, not just an
+assertion based on titles.
+
+\subsection{A3. No.75 --- linear Fibonacci cube
+Gamma\_n}\label{a3.-no.75-linear-fibonacci-cube-gamma_n}
+
+\textbf{Construction by the general two-direction principle.} For
+n\textgreater=2, both endpoint classes have
+\textbar Theta\_1\textbar=\textbar Theta\_n\textbar=F\_n, hence the
+union is EGP with exactly 2F\_n edges. The size identity follows from
+the legal word count on the remaining n-1 positions after imposing a 1
+at the endpoint.
+
+\textbf{Specific optimality still needed.} No.75 v0.10, §§2--5, supplies
+the upper bound by (i) star-forest density for maximum degree
+\textless=3, (ii) projection exclusion and Fibonacci base/recurrence
+certificate for degree 4, and (iii) a five-arm exclusion count for
+larger degrees. Its equality classification singles out the two boundary
+coordinate classes. Theorem 1 of No.79 explains the same star/projection
+mechanism, but does not by itself verify those numerical inequalities or
+uniqueness.
+
+\textbf{Bridge:} structural hypothesis PASS; lower construction PASS;
+final upper bound/uniqueness CONDITIONAL ON No.75 proof, not newly
+proved here.
+
+\subsection{A4. No.76 --- cyclic Lucas cube Lambda\_n: the key
+three-direction
+application}\label{a4.-no.76-cyclic-lucas-cube-lambda_n-the-key-three-direction-application}
+
+The coordinate classes have \textbar Theta\_i\textbar=F\_(n-1). For
+n\textgreater=5, their largest two-class union has only 2F\_(n-1) edges,
+strictly fewer than the No.76 optimum F\_n+F\_(n-2) by
+F\_(n-4)\textgreater0. Therefore a proof that only considers complete
+coordinate-class unions \textbf{cannot} explain this model.
+
+\textbf{Construction by No.79 antipodal radial support.} Fix three
+consecutive cyclic directions D=\{0,1,2\}. Select every direction-D edge
+whose other two D bits are zero. Equivalently these are radial edges at
+the 000 core in each fixed outside-coordinate fiber. No.79 §2 proves
+that the full radial family is EGP. Counting the middle-direction edges
+gives F\_(n-1); each outer direction contributes F\_(n-2), for a total
+
+\begin{verbatim}
+F_(n-1) + 2 F_(n-2) = F_n + F_(n-2).
+\end{verbatim}
+
+For n=3 this is the three-edge star; for n=4 it equals the two-class
+bound; for n\textgreater=5 it strictly beats that bound. The selected
+three-arm center with all other bits zero generates a signed relation
+triangle on D and has potential 000, exactly as in No.79 Theorem 1.
+
+\textbf{Specific optimality still needed.} No.76 v0.1--v0.3 supplies the
+substantial cyclic gap and local star-pair capacity arguments, including
+finite recurrence bases and the exceptional n=6 relaxation case. No.79's
+structural theorem alone does not replace those checks. No.76 does not
+claim full equality-set uniqueness.
+
+\textbf{Bridge:} structural hypothesis PASS; explicit application of
+No.79 radial family PASS; construction cardinality PASS; upper bound
+CONDITIONAL ON No.76 proofs, not independently reproduced by this
+appendix.
+
+\subsection{A5. No.77 --- higher-order linear run-avoiding cube
+Q\_n(1\^{}k)}\label{a5.-no.77-higher-order-linear-run-avoiding-cube-q_n1k}
+
+For k\textgreater=3,n\textgreater=2, let A\_n\^{}(k) count the legal
+words. The two endpoint classes have size A\_n-A\_(n-1) each. The No.79
+two-class principle yields an EGP set of size
+
+\begin{verbatim}
+2 (A_n - A_(n-1)).
+\end{verbatim}
+
+All models are down-sets, so the generic star/projection/signed-block
+framework applies to other candidate extremizers. The No.77 proof
+additionally needs its density inequality B\textgreater=10A\_n/11 and
+the six-separated-direction exclusion for large stars; these yield the
+\textbf{strict} upper bound for any EGP set using \textgreater=3
+directions. The original equality classification then gives the endpoint
+union for n\textgreater=k+1 and any two complete classes for
+2\textless=n\textless=k.
+
+\textbf{Bridge:} structural hypothesis PASS; construction cardinality
+PASS; final upper bound/equality CONDITIONAL ON No.77 proof.
+
+\subsection{A6. No.78 --- higher-order cyclic run-avoiding cube
+H(n,k)}\label{a6.-no.78-higher-order-cyclic-run-avoiding-cube-hnk}
+
+For n\textgreater=k\textgreater=3, all coordinate classes have size
+C\_n\textsuperscript{(k)-A\_(n-1)}(k). The No.79 two-class principle
+yields
+
+\begin{verbatim}
+2 (C_n - A_(n-1))
+\end{verbatim}
+
+selected EGP edges for any pair of distinct directions. The
+down-set/isometry, projection exclusion and star forest requirements
+hold verbatim. The No.78 proof's missing case k=3 relies on a separate
+transfer-matrix certificate (1,296 four-gap/center bases) and a finite
+n=4 equality-classification computation. For k\textgreater=4 it uses the
+original analytic density and excluded-projection arguments. The
+uniqueness of maxima is imported from No.78, not deduced from No.79's
+general structure alone.
+
+\textbf{Bridge:} structural hypothesis PASS; construction cardinality
+PASS; final upper bound/equality CONDITIONAL ON No.78 proof and its
+numerical certificate.
+
+\subsection{A7. Summary and closure
+recommendation}\label{a7.-summary-and-closure-recommendation}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Model
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fits No.79 structural framework
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+A No.79 construction reaches its reported optimum
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+No.79 alone reproves upper bound
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+No.75 Gamma\_n & Yes, all n\textgreater=2 & Yes, two complete endpoint
+classes & \textbf{No} \\
+No.76 Lambda\_n & Yes, all n\textgreater=3 & \textbf{Yes,
+three-direction 000-core radial family} & \textbf{No} \\
+No.77 Q\_n(1\^{}k) & Yes, k\textgreater=3,n\textgreater=2 & Yes, two
+endpoint classes & \textbf{No} \\
+No.78 H(n,k) & Yes, n\textgreater=k\textgreater=3 & Yes, any two
+complete classes & \textbf{No} \\
+\end{longtable}
+
+\textbf{Proposed claim for the final paper:} ``Theorem 1 applies
+individually to all four earlier run-avoiding and Fibonacci/Lucas cube
+families; its two-direction and antipodal radial constructions recover
+their corresponding lower-bound mechanisms. Their exact upper bounds and
+extremizer classifications remain separate model-specific consequences
+proved in Nos.75--78, not new corollaries of Theorem 1 alone.''
+
+This is a stronger, accurately scoped application statement than merely
+listing the four graph names. It does not justify advertising a complete
+unified independent proof of all four prior theorems.
+
+\subsection{A8. Local spot-check
+scope}\label{a8.-local-spot-check-scope}
+
+Run \texttt{python\ -B\ No79\_V06\_APPLICATION\_CHECK\_75\_78.py}. It
+uses \textbf{only Python's standard library} and exhaustively enumerates
+legal vertices and construction edges over 49 selected parameter
+instances: 7 (No.75), 6 (No.76), 21 (No.77), and 15 (No.78). For each,
+the verifier checks downward closure, exact construction count, and
+computes the maximum number of selected edges on any shortest path by an
+independently written shortest-path DAG DP. It does \textbf{not} check
+arbitrary EGP upper bounds, all dimensional parameters, or uniqueness.
+The analytic arguments above, not these finite tests, establish the
+model membership and lower constructions for all stated parameters.
+
+\subsection{A9. Source identity and editorial
+discipline}\label{a9.-source-identity-and-editorial-discipline}
+
+The consulted mathematical source texts, exact SHA256:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{No79\_UNIFIED\_V06\_CLOSURE/MANUSCRIPT\_V06.md} ---
+  \nolinkurl{eadbe8ca533cd7dfafac9dfad37781088af3f8e95f7140b785c8937e087123cf}
+\item
+  \texttt{No75\_V010/RESULTS.md} ---
+  \nolinkurl{d9af8c385e3c67cec908a8dde821878b8d95805f207826d89282f572481a14aa}
+\item
+  \texttt{No76\_LUCAS\_V03/RESULTS.md} ---
+  \nolinkurl{3aec6fd5cb5f77469743a136ade8c86d0f9decdac916f121bea4753b7bd9b092}
+  (references nested v0.1/v0.2 originals)
+\item
+  \texttt{No77\_GENERAL\_K\_V01/MANUSCRIPT.md} ---
+  \nolinkurl{83caf0c565d5f81e9adf96b4cff21245dc962353c8b4bb04f74fd7c68dea49a9}
+\item
+  \texttt{No78\_CYCLIC\_K\_V02/MANUSCRIPT\_V02.md} ---
+  \nolinkurl{cee2fc12ba41b2569eaa39e5b6b1e1912f1d778e055883222faed6ed34708a9c}
+  (references nested v0.1 original)
+\end{itemize}
+
+The above texts are the available frozen research-source materials
+consulted for this appendix, not an independent cross-audit of the
+currently public repository PDFs. No original byte or mathematics is
+changed. A targeted limited application audit was performed for this
+v1.0 preprint. It is not a full independent re-audit of Nos.75--78
+or publication authorization.
+
+\end{document}
